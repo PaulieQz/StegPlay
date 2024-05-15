@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography App</title>
+</head>
+<body>
+    <h1>Steganography App</h1>
+    <h2>Encrypt</h2>
+    <form action="/encrypt" enctype="multipart/form-data" method="post">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="text" name="message" placeholder="Enter your secret message" required>
+        <button type="submit">Encrypt and Download</button>
+    </form>
+    <h2>Decrypt</h2>
+    <form action="/decrypt" enctype="multipart/form-data" method="post" onsubmit="startProgress()">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Decrypt and Display</button>
+    </form>
+    <div id="progress" style="display: none;">
+        <p>Decryption in progress...</p>
+        <progress id="progress-bar" value="0" max="100"></progress>
+    </div>
+    <script>
+        function startProgress() {
+            document.getElementById("progress").style.display = "block";
+            const evtSource = new EventSource("/progress");
+            const progressBar = document.getElementById("progress-bar");
+            evtSource.onmessage = function(event) {
+                if (event.data === "complete") {
+                    evtSource.close();
+                } else {
+                    progressBar.value = event.data;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
