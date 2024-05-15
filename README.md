@@ -21,7 +21,7 @@ This is a simple FastAPI web application that allows you to embed and extract hi
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/steganography_app.git
+    git clone https://github.com/PaulieQz/StegPlay.git
     cd steganography_app
     ```
 
@@ -66,7 +66,7 @@ This is a simple FastAPI web application that allows you to embed and extract hi
 ```
 steganography_app/
 ├── app/
-│ ├── init.py
+│ ├── __init__.py
 │ ├── main.py
 │ ├── steganography.py
 │ ├── static/
